@@ -10,4 +10,11 @@
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.11" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CashFlowRocket.Application\CashFlowRocket.Application.csproj" />
+    <ProjectReference Include="..\CashFlowRocket.Communication\CashFlowRocket.Communication.csproj" />
+    <ProjectReference Include="..\CashFlowRocket.Exception\CashFlowRocket.Exception.csproj" />
+    <ProjectReference Include="..\CashFlowRocket.Infrastruture\CashFlowRocket.Infrastruture.csproj" />
+  </ItemGroup>
+
 </Project>

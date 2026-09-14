@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CashFlowRocket.Communication\CashFlowRocket.Communication.csproj" />
+    <ProjectReference Include="..\CashFlowRocket.Domain\CashFlowRocket.Domain.csproj" />
+    <ProjectReference Include="..\CashFlowRocket.Exception\CashFlowRocket.Exception.csproj" />
+  </ItemGroup>
+
 </Project>
