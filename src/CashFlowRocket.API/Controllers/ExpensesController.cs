@@ -12,10 +12,21 @@ namespace CashFlowRocket.API.Controllers
         [HttpPost]
         public IActionResult Register([FromBody] RequestRegisterExpensesJson request)
         {
-            var useCse = new RegisterExpenseUseCase();
+            try
+            {
+                var useCse = new RegisterExpenseUseCase();
 
-            var response = useCse.Execute(request);
-            return Created(string.Empty, response);
+                var response = useCse.Execute(request);
+                return Created(string.Empty, response);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            catch
+            {
+                return StatusCode(500, new { message = "An unexpected error occurred." });
+            }
         }
     }
 }
