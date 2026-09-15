@@ -15,9 +15,10 @@ namespace CashFlowRocket.Application.UseCases.Expenses.Register
 
         private void Validate(RequestRegisterExpensesJson request)
         {
-            if (request == null)
+            var titleEmpty = string.IsNullOrWhiteSpace(request.Title);
+            if (titleEmpty)
             {
-                throw new ArgumentException("Request cannot be null.");
+                throw new ArgumentException("The title is required");
             }
             if (request.Amount <= 0)
             {

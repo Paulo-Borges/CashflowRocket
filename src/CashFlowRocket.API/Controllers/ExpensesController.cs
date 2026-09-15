@@ -1,5 +1,6 @@
 ﻿using CashFlowRocket.Application.UseCases.Expenses.Register;
 using CashFlowRocket.Communication.Requests;
+using CashFlowRocket.Communication.Responses;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
@@ -14,18 +15,26 @@ namespace CashFlowRocket.API.Controllers
         {
             try
             {
-                var useCse = new RegisterExpenseUseCase();
+                var useCase = new RegisterExpenseUseCase();
 
-                var response = useCse.Execute(request);
+                var response = useCase.Execute(request);
                 return Created(string.Empty, response);
             }
             catch (ArgumentException ex)
             {
-                return BadRequest(new { message = ex.Message });
+                var errorResponse = new ResponseErrorJson();
+                errorResponse.ErrorMessage = ex.Message;
+
+                return BadRequest(errorResponse);
             }
             catch
             {
-                return StatusCode(500, new { message = "An unexpected error occurred." });
+                var errorResponse = new ResponseErrorJson
+                {
+                    ErrorMessage = "An unexpected error occurred."
+                };
+
+                return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
     }
