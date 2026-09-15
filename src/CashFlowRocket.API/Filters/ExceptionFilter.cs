@@ -1,4 +1,5 @@
 ﻿using CashFlowRocket.Communication.Responses;
+using CashFlowRocket.Exception;
 using CashFlowRocket.Exception.ExceptionsBase;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -16,10 +17,8 @@ namespace CashFlowRocket.API.Filters
             else
             {
                 ThrowUnkowError(context);
-            }
-            
+            }     
         }
-
         private void HandleProjectException(ExceptionContext context)
         {
             if (context.Exception is ErrorOnValidationException)
@@ -29,7 +28,6 @@ namespace CashFlowRocket.API.Filters
 
                 context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
                 context.Result = new BadRequestObjectResult(errorResponse);
-
             }
             else
             {
@@ -38,16 +36,13 @@ namespace CashFlowRocket.API.Filters
                 context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
                 context.Result = new BadRequestObjectResult(errorResponse);
             }
-
         }
-
         private void ThrowUnkowError(ExceptionContext context)
         {
-            var errorResponse = new ResponseErrorJson("An unexpected error occurred.");
+            var errorResponse = new ResponseErrorJson(ResourceErrorMessages.UNKNOWN_ERROR);
 
             context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
-            context.Result = new ObjectResult(errorResponse);
-           
+            context.Result = new ObjectResult(errorResponse); 
         }
     }
 }

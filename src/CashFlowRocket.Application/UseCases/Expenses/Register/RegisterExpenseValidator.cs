@@ -1,4 +1,5 @@
 ﻿using CashFlowRocket.Communication.Requests;
+using CashFlowRocket.Exception;
 using FluentValidation;
 
 namespace CashFlowRocket.Application.UseCases.Expenses.Register
@@ -7,10 +8,10 @@ namespace CashFlowRocket.Application.UseCases.Expenses.Register
     {
         public RegisterExpenseValidator()
         {
-            RuleFor(e => e.Title).NotEmpty().WithMessage("The title is required");
-            RuleFor(e => e.Amount).GreaterThan(0).WithMessage("The amount must be greater than zero");
-            RuleFor(e => e.Date).LessThanOrEqualTo(DateTime.Now).WithMessage("The date cannot be in the future");
-            RuleFor(e => e.PaymentType).IsInEnum().WithMessage("Please specify a valid payment type");
+            RuleFor(e => e.Title).NotEmpty().WithMessage(ResourceErrorMessages.TITLE_REQUIRED);
+            RuleFor(e => e.Amount).GreaterThan(0).WithMessage(ResourceErrorMessages.AMOUNT_MUST_BE_GREATER_THAN_ZERO);
+            RuleFor(e => e.Date).LessThanOrEqualTo(DateTime.Now).WithMessage(ResourceErrorMessages.EXPENSES_CANNOT_BE_FOR_THE_FUTURE);
+            RuleFor(e => e.PaymentType).IsInEnum().WithMessage(ResourceErrorMessages.PAYMENT_TYPE_INVALID1);
         }
     }
 }
