@@ -22,8 +22,10 @@ namespace CashFlowRocket.API.Controllers
             }
             catch (ArgumentException ex)
             {
-                var errorResponse = new ResponseErrorJson();
-                errorResponse.ErrorMessage = ex.Message;
+                var errorResponse = new ResponseErrorJson
+                {
+                    ErrorMessage = "An unexpected error occurred."
+                };
 
                 return BadRequest(errorResponse);
             }
