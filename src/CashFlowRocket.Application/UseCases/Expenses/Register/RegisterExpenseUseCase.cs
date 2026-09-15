@@ -1,5 +1,6 @@
 ﻿using CashFlowRocket.Communication.Requests;
 using CashFlowRocket.Communication.Responses;
+using CashFlowRocket.Exception.ExceptionsBase;
 using System.Net.Http.Headers;
 
 namespace CashFlowRocket.Application.UseCases.Expenses.Register
@@ -18,7 +19,14 @@ namespace CashFlowRocket.Application.UseCases.Expenses.Register
             var validator = new RegisterExpenseValidator();
 
             var result = validator.Validate(request);
-           
+
+            if (result.IsValid == false)
+            {
+                var errorMessages = result.Errors.Select(f => f.ErrorMessage).ToList();
+
+                throw new ErrorOnValidationException(errorMessages);
+
+            }
         }
     }
 }
