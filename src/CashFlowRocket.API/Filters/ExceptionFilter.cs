@@ -17,6 +17,7 @@ namespace CashFlowRocket.API.Filters
             else
             {
                 ThrowUnkowError(context);
+
             }     
         }
         private void HandleProjectException(ExceptionContext context)
