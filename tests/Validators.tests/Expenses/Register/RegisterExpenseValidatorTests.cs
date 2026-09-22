@@ -24,13 +24,16 @@ namespace Validators.tests.Expenses.Register
 
         }
 
-        [Fact]
-        public void Error_Title_Empty()
+        [Theory]
+        [InlineData("")]
+        [InlineData("      ")]
+        [InlineData(null)]
+        public void Error_Title_Empty(string title)
         {
             //Arrange
             var validator = new RegisterExpenseValidator();
             var request = RequestRegisterExpenseJsonBuilder.Build();
-            request.Title = string.Empty;
+            request.Title = title;
             //Act
             var result = validator.Validate(request);
             //Assert
