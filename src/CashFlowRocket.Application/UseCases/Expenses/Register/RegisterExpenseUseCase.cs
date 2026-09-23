@@ -1,7 +1,8 @@
 ﻿using CashFlowRocket.Communication.Requests;
 using CashFlowRocket.Communication.Responses;
+using CashFlowRocket.Domain.Entities;
 using CashFlowRocket.Exception.ExceptionsBase;
-using System.Net.Http.Headers;
+using CashFlowRocket.Infrastruture.DataContext;
 
 namespace CashFlowRocket.Application.UseCases.Expenses.Register
 {
@@ -10,6 +11,21 @@ namespace CashFlowRocket.Application.UseCases.Expenses.Register
         public ResponseRegisteredExpenseJson Execute(RequestRegisterExpensesJson request)
         {
             Validate(request);
+
+            var dbContext = new AppDbContext();
+
+            var entity = new Expense 
+            {
+                Amount = request.Amount,
+                Date = request.Date,
+                Description = request.Description,
+                Title = request.Title,
+                PaymentType = (Domain.Enums.PaymentType)request.PaymentType,
+            };
+
+            dbContext.Expenses.Add(entity);
+
+            dbContext.SaveChanges();
 
             return new ResponseRegisteredExpenseJson();
         }

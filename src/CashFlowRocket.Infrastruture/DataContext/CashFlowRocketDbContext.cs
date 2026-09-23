@@ -3,19 +3,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CashFlowRocket.Infrastruture.DataContext
 {
-    public class AppDbContext : DbContext
+    public class CashFlowRocketDbContext : DbContext
     {
-        //public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-
         public DbSet<Expense> Expenses { get; set; }
-
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(
-"Data Source=(localdb)\\MSSQLLocalDB;Database=CashFlowRocketDb;Trusted_Connection=True;Encrypt=False;TrustServerCertificate=True"
-);
+            //optionsBuilder.UseSqlServer("YourConnectionStringHere");
         }
 
     }
