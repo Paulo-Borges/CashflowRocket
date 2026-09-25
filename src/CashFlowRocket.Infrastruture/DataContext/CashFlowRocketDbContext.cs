@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CashFlowRocket.Infrastruture.DataContext
 {
-    public class CashFlowRocketDbContext : DbContext
+    internal class CashFlowRocketDbContext : DbContext
     {
         public DbSet<Expense> Expenses { get; set; }
 

@@ -2,7 +2,6 @@
 using CashFlowRocket.Communication.Responses;
 using CashFlowRocket.Domain.Entities;
 using CashFlowRocket.Exception.ExceptionsBase;
-using CashFlowRocket.Infrastruture.DataContext;
 
 namespace CashFlowRocket.Application.UseCases.Expenses.Register
 {
@@ -12,7 +11,7 @@ namespace CashFlowRocket.Application.UseCases.Expenses.Register
         {
             Validate(request);
 
-            var dbContext = new AppDbContext();
+            //var dbContext = new AppDbContext();
 
             var entity = new Expense 
             {
@@ -23,9 +22,9 @@ namespace CashFlowRocket.Application.UseCases.Expenses.Register
                 PaymentType = (Domain.Enums.PaymentType)request.PaymentType,
             };
 
-            dbContext.Expenses.Add(entity);
+            //dbContext.Expenses.Add(entity);
 
-            dbContext.SaveChanges();
+            //dbContext.SaveChanges();
 
             return new ResponseRegisteredExpenseJson();
         }
