@@ -1,22 +1,17 @@
 ﻿using CashFlowRocket.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.Json;
 
 namespace CashFlowRocket.Infrastruture.DataContext
 {
     public class AppDbContext : DbContext
     {
-        //public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+        public AppDbContext(DbContextOptions options) : base(options)
+        {
+            
+        }
 
         public DbSet<Expense> Expenses { get; set; }
-
-
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(
-"Data Source=(localdb)\\MSSQLLocalDB;Database=CashFlowRocketDb;Trusted_Connection=True;Encrypt=False;TrustServerCertificate=True"
-);
-        }
 
     }
 }

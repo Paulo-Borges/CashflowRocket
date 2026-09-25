@@ -13,7 +13,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
 
 // ------------------------X----Injeção de Dependência --------------------------X-----------------------------------
-builder.Services.AddInfrastructure();
+builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 
 

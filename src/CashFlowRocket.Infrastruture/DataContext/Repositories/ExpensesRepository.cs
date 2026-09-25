@@ -17,7 +17,7 @@ namespace CashFlowRocket.Infrastruture.DataContext.Repositories
 
             _dbContext.Expenses.Add(expense);    
 
-            _dbContext.SaveChanges();
+            
         }
     }
 }
