@@ -1,12 +1,20 @@
 ﻿using CashFlowRocket.Communication.Requests;
 using CashFlowRocket.Communication.Responses;
 using CashFlowRocket.Domain.Entities;
+using CashFlowRocket.Domain.Repositories.Expenses;
 using CashFlowRocket.Exception.ExceptionsBase;
 
 namespace CashFlowRocket.Application.UseCases.Expenses.Register
 {
-    public class RegisterExpenseUseCase
+    public class RegisterExpenseUseCase : IRegisterExpenseUseCase
     {
+        private readonly IExpensesRepository _repository;
+
+        public RegisterExpenseUseCase(IExpensesRepository repository)
+        {
+            _repository = repository;
+
+        }
         public ResponseRegisteredExpenseJson Execute(RequestRegisterExpensesJson request)
         {
             Validate(request);
@@ -21,6 +29,8 @@ namespace CashFlowRocket.Application.UseCases.Expenses.Register
                 Title = request.Title,
                 PaymentType = (Domain.Enums.PaymentType)request.PaymentType,
             };
+
+            _repository.Add(entity);
 
             //dbContext.Expenses.Add(entity);
 

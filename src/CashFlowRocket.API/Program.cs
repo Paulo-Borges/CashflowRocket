@@ -1,6 +1,6 @@
 using CashFlowRocket.API.Filters;
 using CashFlowRocket.API.Middleware;
-using CashFlowRocket.Domain.Repositories.Expenses;
+using CashFlowRocket.Application;
 using CashFlowRocket.Infrastruture;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +14,7 @@ builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)))
 
 // ------------------------X----Injeção de Dependência --------------------------X-----------------------------------
 builder.Services.AddInfrastructure();
+builder.Services.AddApplication();
 
 
 var app = builder.Build();

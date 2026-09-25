@@ -9,10 +9,14 @@ namespace CashFlowRocket.API.Controllers
     public class ExpensesController : ControllerBase
     {
         [HttpPost]
-        public IActionResult Register([FromBody] RequestRegisterExpensesJson request)
+        public IActionResult Register(
+            [FromServices] IRegisterExpenseUseCase useCase,
+            [FromBody] RequestRegisterExpensesJson request)
         {  
-                var useCase = new RegisterExpenseUseCase();
+ 
+
                 var response = useCase.Execute(request);
+
                 return Created(string.Empty, response);  
         }
     }
